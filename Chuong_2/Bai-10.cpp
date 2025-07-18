@@ -17,7 +17,7 @@ public:
     }
     friend ostream& operator<<(ostream& output, const Math& m){
         if (m.a == 0){
-            output << m.b << "sqrt(7)" << endl;
+            output << m.b << "*sqrt(7)" << endl;
             return output;
         }
         if (m.b == 0){
@@ -29,7 +29,7 @@ public:
             return output;
         }
         else if(m.b < 0){
-            output << m.a << " - " << m.b << "*sqrt(7)";
+            output << m.a << " - " << -m.b << "*sqrt(7)";
             return output;
         }
     }
@@ -47,8 +47,8 @@ public:
     }
     Math operator*(Math num2){
         Math numSum;
-        numSum.a = this->a * num2.a;
-        numSum.b = this->b * num2.b;
+        numSum.a = this->a * num2.a + this->b * num2.b * 7; // a1*a2 + b1*b2*7
+        numSum.b = this->a * num2.b + this->b * num2.a;     // a1*b2 + b1*a2
         return numSum;
     }
     void signChange(){
@@ -84,17 +84,17 @@ int main() {
     Math m6(1, 2);
     Math m7(3, 4);
     Math sum = m6 + m7;
-    cout << "m6 + m7 = " << sum << endl; // Mong đợi: 4 + 6*sqrt(7), nhưng code hiện tại cho kết quả sai do nhân sqrt(7)
+    cout << "m6 + m7 = " << sum << endl; // Mong đợi: 4 + 6*sqrt(7)
 
     // Test case 4: Kiểm tra toán tử trừ
     cout << "\nTest case 4: Toán tử trừ" << endl;
     Math diff = m6 - m7;
-    cout << "m6 - m7 = " << diff << endl; // Mong đợi: -2 - 2*sqrt(7), nhưng code hiện tại cho kết quả sai do nhân sqrt(7)
+    cout << "m6 - m7 = " << diff << endl; // Mong đợi: -2 - 2*sqrt(7)
 
     // Test case 5: Kiểm tra toán tử nhân
     cout << "\nTest case 5: Toán tử nhân" << endl;
     Math prod = m6 * m7;
-    cout << "m6 * m7 = " << prod << endl; // Mong đợi: (1*3 + 2*4*7) + (1*4 + 2*3)*sqrt(7) = 59 + 10*sqrt(7), nhưng code hiện tại cho kết quả sai
+    cout << "m6 * m7 = " << prod << endl; // Mong đợi: 59 + 10*sqrt(7)
 
     // Test case 6: Kiểm tra hàm signChange
     cout << "\nTest case 6: Hàm signChange" << endl;
