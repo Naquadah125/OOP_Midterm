@@ -88,14 +88,14 @@ public:
     ~Binary() {}
 
     void doiNhiPhan(int n){
-        if (n > 0) {
-            doiNhiPhan(n / 2);
-            cout << n % 2;
-        }
-        if (n == 0) {
-            cout << "0";
+        if (n < 0) {
+            cout << "Khong xu ly so am!";
             return;
         }
+        if (n > 1) {
+            doiNhiPhan(n / 2);
+        }
+        cout << n % 2;
     }
 };
 
